@@ -1,34 +1,45 @@
 ﻿#include <iostream>
 using namespace std;
 
-class Car
+class Person
 {
 private:
-	int m_price;
-	int m_height;
+	int m_gender;
+	int m_age;
 public:
-	Car(int a = 0,int b = 0):m_price(a),m_height(b)
+	Person(int a = 0, int b = 20) :m_gender(a), m_age(b)
 	{
-		cout << "m_price = " << m_price << endl;
-		cout << "m_height = " << m_height << endl;
+		cout << "gender = " << m_gender << endl;
+		cout << "age = " << m_age << endl;
 	}
-	////拷贝构造函数
-	//Car(const Car &car):m_price(car.m_price),m_height(car.m_height)
-	//{
-	//	cout << "m_price = " << m_price << endl;
-	//	cout << "m_height = " << m_height << endl;
-	//}
-	int m_other = 99;
+	Person(const Person &person) :m_gender(person.m_gender), m_age(person.m_age)
+	{
+		cout << "拷贝gender = " << m_gender << endl;
+		cout << "拷贝age = " << m_age << endl;
+	}
 };
 
+class Student :Person
+{
+public:
+	Student(int a = 1, int b = 25) :Person(a,b)
+	{
+		/*cout << "Student gender = " << m_gender << endl;
+		cout << "Student age = " << m_age << endl;*/
+	}
+	Student(const Student &stu) :Person(stu)
+	{
+
+	}
+};
 
 int main()
 {
-	Car car1;
-	Car car2(200000, 6);
+	Person person1;
+	Person person(person1);
 
-	Car car3(car2);
-	
-	cout << car3.m_other<< endl;
+	Student stu1;
+	Student stu2(stu1);
+
 	return 0;
 }
