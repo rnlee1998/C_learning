@@ -1,45 +1,42 @@
 ﻿#include <iostream>
 using namespace std;
 
-class Person
+class Point
 {
+	friend Point operator+(Point p1, Point p2);
 private:
-	int m_gender;
-	int m_age;
+	
+	int m_x;
+	int m_y;
 public:
-	Person(int a = 0, int b = 20) :m_gender(a), m_age(b)
-	{
-		cout << "gender = " << m_gender << endl;
-		cout << "age = " << m_age << endl;
+	int getX() {
+		return m_x;
+	} 
+	int getY() {
+		return m_y;
 	}
-	Person(const Person &person) :m_gender(person.m_gender), m_age(person.m_age)
+	Point(int x, int y) :m_x(x), m_y(y)
 	{
-		cout << "拷贝gender = " << m_gender << endl;
-		cout << "拷贝age = " << m_age << endl;
+
+	}
+	void display()
+	{
+		cout << "P("<<m_x<<","<<m_y<<")" << endl;
 	}
 };
 
-class Student :Person
+
+Point operator+(Point p1, Point p2)
 {
-public:
-	Student(int a = 1, int b = 25) :Person(a,b)
-	{
-		/*cout << "Student gender = " << m_gender << endl;
-		cout << "Student age = " << m_age << endl;*/
-	}
-	Student(const Student &stu) :Person(stu)
-	{
-
-	}
-};
+	return Point(p1.m_x + p2.getX(), p1.getY() + p2.getY());
+}
 
 int main()
 {
-	Person person1;
-	Person person(person1);
-
-	Student stu1;
-	Student stu2(stu1);
+	Point point1(1,0);
+	Point point2(2, 1);
+	Point point3 = point1+point2;
+	point3.display();
 
 	return 0;
 }
